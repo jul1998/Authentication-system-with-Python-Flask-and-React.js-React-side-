@@ -31,7 +31,9 @@ function Signup (){
             response = await response.json()
             alert(response)
         }else{
-            alert("Error")
+            response = await response.json()
+            console.log(response)
+            alert(response.mensaje)
         }
 
     }
