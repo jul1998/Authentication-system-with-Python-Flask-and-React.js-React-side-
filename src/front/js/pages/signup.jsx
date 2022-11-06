@@ -1,6 +1,8 @@
-import React from "react"
-
+import React, {useContext} from "react"
+import {Context} from "../store/appContext"
+import { Link } from "react-router-dom"
 function Signup (){
+    const {store,actions} = useContext(Context)
 
     const signUp = async (e) =>{
         e.preventDefault()
@@ -15,7 +17,7 @@ function Signup (){
             "email": email,
             "password": password
         }
-
+            /*
         let BACKEND_URL = process.env.BACKEND_URL
         console.log(BACKEND_URL)
         let response = await fetch(BACKEND_URL+"signup",{
@@ -24,17 +26,21 @@ function Signup (){
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
-        })
+        })*/
 
+        let response = await actions.genericFetch("signup","POST",objBody) //response is a promise
+
+        //if (response.ok){
+
+        //}else{
+
+        //}
+
+        response = await response.json() //response is an JS object due to .json
+        console.log(response)
+        alert(response.mensaje)
         
-        if (response.ok){
-            response = await response.json()
-            alert(response)
-        }else{
-            response = await response.json()
-            console.log(response)
-            alert(response.mensaje)
-        }
+
 
     }
 
@@ -58,6 +64,8 @@ function Signup (){
                     <button type="submit" className="btn btn-primary">Sign in</button>
                 </div>
             </form>
+
+            <Link to="/">Back to home</Link>
             
         </div>
 

@@ -46,7 +46,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			genericFetch: async (endpoint, method="GET", data=undefined)=>{
+				let BACKEND_URL = process.env.BACKEND_URL
+				let response = await fetch(BACKEND_URL+endpoint,{
+					method: method,
+					body: data?JSON.stringify(data):undefined,
+					headers: {
+							'Content-type': 'application/json; charset=UTF-8'
+						}
+				})
+				return response
+			},
+
+			genericFetchProtected: async (endpoint, method="GET", data=undefined)=> {
+				const store = getStore()
+				let storeToken = store.token
+				let BACKEND_URL = process.env.BACKEND_URL
+				let response = await fetch(BACKEND_URL+endpoint,{
+					method: method,
+					body: data?JSON.stringify(data):undefined,
+					headers: {
+							'Content-type': 'application/json; charset=UTF-8',
+							"Authorization": "Bearer " + storeToken
+						}
+				})
+				return response
+			},
+			
+			login: async (endpoint, method="GET", data=undefined) =>{
+				const store = getStore()
+				let BACKEND_URL = process.env.BACKEND_URL
+				let response = await fetch(BACKEND_URL+endpoint,{
+					method: method,
+					body: JSON.stringify(data),
+					headers: {
+							'Content-type': 'application/json; charset=UTF-8'
+						}
+				})
+				//response = await response.json()
+				let responseJson = await response.json()
+				localStorage.setItem("token", responseJson.access_token)
+				setStore({...store, token:responseJson.access_token})
+				console.log(responseJson)
+				return responseJson
 			}
+
+			
 		}
 	};
 };
