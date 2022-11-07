@@ -11,14 +11,16 @@ function Login(){
     const test = async() =>{
         let response = await actions.genericFetchProtected("protected") 
         let responseJson = await response.json()
-        //console.log(responseJson)
+        console.log(responseJson)
         if (responseJson.logged_in_as){
             return navigate("userProfile")
+        }else{
+            return console.log(responseJson.msg) 
         }
         }
 
     
-    const login = async (e) =>{
+    const login = async (e) =>{ //This login is to get data from form
         e.preventDefault()
         console.log("We are in login function")
 
@@ -31,16 +33,6 @@ function Login(){
             "email": email,
             "password": password
         }
-            /*
-        let BACKEND_URL = process.env.BACKEND_URL
-        console.log(BACKEND_URL)
-        let response = await fetch(BACKEND_URL+"signup",{
-            method: 'POST',
-            body: JSON.stringify(objBody),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            }
-        })*/
         
         let response = await actions.login("login","POST",objBody) //response is a promise
         if (response){ //Redirect to user page if response is true

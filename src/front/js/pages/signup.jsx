@@ -17,16 +17,6 @@ function Signup (){
             "email": email,
             "password": password
         }
-            /*
-        let BACKEND_URL = process.env.BACKEND_URL
-        console.log(BACKEND_URL)
-        let response = await fetch(BACKEND_URL+"signup",{
-            method: 'POST',
-            body: JSON.stringify(objBody),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            }
-        })*/
 
         let response = await actions.genericFetch("signup","POST",objBody) //response is a promise
 
@@ -38,12 +28,9 @@ function Signup (){
 
         response = await response.json() //response is an JS object due to .json
         console.log(response)
-        alert(response.mensaje)
-        
-
+        alert(response)
 
     }
-
 
 
     return(

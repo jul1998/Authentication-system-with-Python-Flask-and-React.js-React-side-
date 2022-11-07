@@ -90,6 +90,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({...store, token:responseJson.access_token})
 				console.log(responseJson)
 				return responseJson
+			},
+
+			logout:async ()=>{
+				const store = getStore()
+				let response = await getActions().genericFetchProtected("logout")
+				console.log(await response.json())
+				setStore({...store, token:""})
+			
+			
 			}
 
 			
