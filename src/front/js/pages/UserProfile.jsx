@@ -1,6 +1,6 @@
 import React, {useContext} from "react"
 import {Context} from "../store/appContext"
-import { useNavigate   } from "react-router-dom";
+import { useNavigate, Link   } from "react-router-dom";
 
 export default function UserProfile(){
     console.log("UserProfile")
@@ -13,6 +13,10 @@ export default function UserProfile(){
                 actions.logout()
                 return navigate("/")
                 }}>Log out</button>
+            <div>
+                <Link to="/usersList">users List</Link>
+            </div>
+            
         </div>
 
     )

@@ -76,6 +76,8 @@ function Login(){
             </form>
             <Link to="/">Back to home</Link>
             {store.token? <button onClick={() => test()}>Secured endpoint</button>:null}
+            
+
         </div>
     )
 }

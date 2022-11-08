@@ -8,8 +8,9 @@ import { Single } from "./pages/single";
 import {Signup} from "./pages/signup.jsx"; //Component to register user
 import {Login} from "./pages/Login.jsx"
 import UserProfile from "./pages/UserProfile.jsx"
-import injectContext from "./store/appContext";
+import {UsersList} from "./pages/UsersList.jsx"
 
+import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<UserProfile />} path="login/userProfile" />
+                        <Route element={<UsersList />} path="usersList" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
